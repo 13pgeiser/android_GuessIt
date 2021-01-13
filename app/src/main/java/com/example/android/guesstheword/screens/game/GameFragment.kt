@@ -48,17 +48,10 @@ class GameFragment : Fragment() {
                 false
         )
 
-        // Deprecated...
-        //viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         Log.i("GameFragment", "Called ViewModelProviders.of")
 
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
+        binding.gameViewModel = viewModel
 
         viewModel.score.observe(this, Observer {
             newScore -> binding.scoreText.text = newScore.toString()
