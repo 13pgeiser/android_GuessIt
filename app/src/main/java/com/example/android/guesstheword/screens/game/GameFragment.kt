@@ -59,13 +59,12 @@ class GameFragment : Fragment() {
             viewModel.onSkip()
         }
 
-        viewModel.score.observe(this, Observer { newScore ->
-            binding.scoreText.text = newScore.toString()
-
+        viewModel.score.observe(this, Observer {
+            newScore -> binding.scoreText.text = newScore.toString()
         })
 
-        viewModel.word.observe(this, Observer { newWord ->
-            binding.wordText.text = newWord
+        viewModel.word.observe(this, Observer {
+            newWord -> binding.wordText.text = newWord
         })
 
         viewModel.eventGameFinished.observe(this, Observer { hasFinished ->
@@ -75,6 +74,10 @@ class GameFragment : Fragment() {
                 findNavController(this).navigate(action)
                 viewModel.onGameFinishComplete()
             }
+        })
+
+        viewModel.timeRemaining.observe(this, Observer {
+            remainingTime -> binding.timerText.text = remainingTime
         })
 
         return binding.root
